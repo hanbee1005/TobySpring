@@ -4,7 +4,7 @@ import domain.User;
 
 import java.sql.*;
 
-public class UserDao {
+public abstract class UserDao {
     // JDBC API가 만들어내는 예외를 잡아서 직접 처리하거나, 메소드에 throws를 선언해서 예외가 발생하면 밖으로 던지게 한다.
     public void add(User user) throws ClassNotFoundException, SQLException {
         Connection c = getConnection();
@@ -46,9 +46,5 @@ public class UserDao {
     }
 
     // 1. DB 연결을 위한 Connection 가져오기
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/tobyspring_db", "admin", "admin123");
-        return c;
-    }
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 }
