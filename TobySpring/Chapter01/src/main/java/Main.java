@@ -1,4 +1,3 @@
-import dao.DUserDao;
 import dao.UserDao;
 import domain.User;
 
