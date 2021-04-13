@@ -2,17 +2,28 @@ package dao;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DaoFactory {
     @Bean
     public UserDao userDao() {
-        return new UserDao(getConnection());
+        UserDao userDao = new UserDao();
+        userDao.setDataSource(dataSource());
+        return userDao;
     }
 
-    // 추가로 다른 Dao들이 생겼을 때를 중복을 방지하기 위한 메소드 분리
     @Bean
-    public ConnectionMaker getConnection() {
-        return new DConnectionMaker();
+    public DataSource dataSource() {
+        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+
+        dataSource.setDriverClass(com.mysql.cj.jdbc.Driver.class);
+        dataSource.setUrl("jdbc:mysql://localhost/tobyspring_db");
+        dataSource.setUsername("admin");
+        dataSource.setPassword("admin123");
+
+        return dataSource;
     }
 }
