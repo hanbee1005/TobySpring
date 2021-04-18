@@ -18,12 +18,16 @@ class MainTest {
         ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
         UserDao dao = context.getBean("userDao", UserDao.class);
 
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
         User user = new User();
         user.setId("gyumee");
         user.setName("dami");
         user.setPassword("5678");
 
         dao.add(user);
+        assertThat(dao.getCount(), is(1));
 
         User user2 = dao.get(user.getId());
         System.out.println(user2.getName());
