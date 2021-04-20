@@ -1,4 +1,3 @@
-import dao.DaoFactory;
 import dao.UserDao;
 import domain.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = DaoFactory.class)
+@ContextConfiguration(locations = "/applicationContext.xml")
 class MainTest {
     @Autowired UserDao dao;
 
