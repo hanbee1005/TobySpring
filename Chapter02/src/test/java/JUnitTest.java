@@ -10,6 +10,7 @@ import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "/test-applicationContext.xml")
@@ -34,7 +35,7 @@ public class JUnitTest {
         assertThat(testObject, not(hasItem(this)));
         testObject.add(this);
 
-        assertThat(contextObject == null || contextObject == this.context, is(true));
+        assertTrue(contextObject == null || contextObject == this.context);
         contextObject = this.context;
     }
 
@@ -43,7 +44,7 @@ public class JUnitTest {
         assertThat(testObject, not(hasItem(this)));
         testObject.add(this);
 
-        assertThat(contextObject == null || contextObject == this.context, is(true));
+        assertThat(contextObject, either(is(nullValue())).or(is(this.context)));
         contextObject = this.context;
     }
 }
