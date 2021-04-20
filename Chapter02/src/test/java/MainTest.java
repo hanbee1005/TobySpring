@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = "/applicationContext.xml")
+@ContextConfiguration(locations = "/test-applicationContext.xml")
 class MainTest {
     @Autowired UserDao dao;
 
