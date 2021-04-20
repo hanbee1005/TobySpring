@@ -1,28 +1,29 @@
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.sameInstance;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class JUnitTest {
-    static JUnitTest testObject;
+    static Set<JUnitTest> testObject = new HashSet<>();
 
     @Test
     public void test1() {
-        assertThat(this, is(not(sameInstance(testObject))));
-        testObject = this;
+        assertThat(testObject, not(hasItem(this)));
+        testObject.add(this);
     }
 
     @Test
     public void test2() {
-        assertThat(this, is(not(sameInstance(testObject))));
-        testObject = this;
+        assertThat(testObject, not(hasItem(this)));
+        testObject.add(this);
     }
 
     @Test
     public void test3() {
-        assertThat(this, is(not(sameInstance(testObject))));
-        testObject = this;
+        assertThat(testObject, not(hasItem(this)));
+        testObject.add(this);
     }
 }
