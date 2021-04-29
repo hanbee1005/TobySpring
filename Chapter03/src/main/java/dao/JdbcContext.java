@@ -28,11 +28,16 @@ public class JdbcContext {
         }
     }
 
-    public void executeSql(final String query) throws SQLException {
+    public void executeSql(final String query, final String ...params) throws SQLException {
         workWithStatementStrategy(new StatementStrategy() {
             @Override
             public PreparedStatement makePrepareStatement(Connection c) throws SQLException {
                 PreparedStatement ps = c.prepareStatement(query);
+
+                for (int i = 0; i < params.length; i++) {
+                    ps.setString(i+1, params[i]);
+                }
+
                 return ps;
             }
         });

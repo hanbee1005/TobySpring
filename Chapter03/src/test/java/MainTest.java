@@ -33,7 +33,6 @@ class MainTest {
 
         JdbcContext jdbcContext = new JdbcContext();
         jdbcContext.setDataSource(dataSource);
-        dao.setJdbcContext(jdbcContext);
     }
 
     @Test
