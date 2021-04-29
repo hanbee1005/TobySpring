@@ -1,3 +1,4 @@
+import dao.JdbcContext;
 import dao.UserDao;
 import domain.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +30,10 @@ class MainTest {
         DataSource dataSource = new SingleConnectionDataSource(
                 "jdbc:mysql://localhost/test_tobyspring_db", "admin", "admin123", true);
         dao.setDataSource(dataSource);
+
+        JdbcContext jdbcContext = new JdbcContext();
+        jdbcContext.setDataSource(dataSource);
+        dao.setJdbcContext(jdbcContext);
     }
 
     @Test
