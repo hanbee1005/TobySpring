@@ -27,4 +27,9 @@ public class LearningTest {
     public void multiplyOfNumbers() throws IOException {
         assertThat(calculator.calMultiply(numFilePath), is(24));
     }
+
+    @Test
+    public void concatenateOfNumbers() throws IOException {
+        assertThat(calculator.concatenate(numFilePath), is("1234"));
+    }
 }
