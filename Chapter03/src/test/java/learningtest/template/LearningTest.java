@@ -1,5 +1,6 @@
 package learningtest.template;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -8,11 +9,22 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class LearningTest {
+    Calculator calculator;
+    String numFilePath;
+
+    @BeforeEach
+    public void setUp() {
+        this.calculator = new Calculator();
+        this.numFilePath = getClass().getResource("number.txt").getPath();
+    }
 
     @Test
     public void sumOfNumbers() throws IOException {
-        Calculator calculator = new Calculator();
-        int sum = calculator.calcSum(getClass().getResource("number.txt").getPath());
-        assertThat(sum, is(10));
+        assertThat(calculator.calcSum(numFilePath), is(10));
+    }
+
+    @Test
+    public void multiplyOfNumbers() throws IOException {
+        assertThat(calculator.calMultiply(numFilePath), is(24));
     }
 }
