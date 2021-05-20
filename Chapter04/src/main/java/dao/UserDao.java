@@ -4,6 +4,7 @@ import com.mysql.cj.exceptions.MysqlErrorNumbers;
 import domain.User;
 import exception.DuplicateUserIdException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -33,7 +34,7 @@ public class UserDao {
         this.dataSource = dataSource;
     }
 
-    public void add(final User user) {
+    public void add(final User user) throws DuplicateKeyException {
         this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
                 user.getId(), user.getName(), user.getPassword());
 
