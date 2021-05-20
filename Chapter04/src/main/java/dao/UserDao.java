@@ -34,21 +34,13 @@ public class UserDao {
         this.dataSource = dataSource;
     }
 
-    public void add(final User user) throws DuplicateKeyException {
-        this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
-                user.getId(), user.getName(), user.getPassword());
-
-//        try {
-//            // JDBC를 이용해 user 정보를 DB에 추가하는 코드 또는
-//            // 그런 기능이 있는 다른 SQLException을 던지는 메소드를 호출하는 코드
-//        } catch (SQLException e) {
-//            // ErrorCode가 MySQL의 "Duplicate Entity(1062)"이면 예외 전환
-//            if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY) {
-//                throw new DuplicateUserIdException(e);  // 예외 전환
-//            } else {
-//                throw new RuntimeException();  // 예외 포장
-//            }
-//        }
+    public void add(final User user) throws DuplicateUserIdException {
+        try {
+            this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
+                    user.getId(), user.getName(), user.getPassword());
+        } catch (DuplicateKeyException e) {
+            throw new DuplicateUserIdException(e);
+        }
     }
 
     public User get(String id) throws SQLException {
