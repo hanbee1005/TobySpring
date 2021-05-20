@@ -1,8 +1,10 @@
 import dao.JdbcContext;
 import dao.UserDaoJdbc;
 import domain.User;
+import exception.DuplicateUserIdException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
@@ -76,6 +78,17 @@ class MainTest {
 
         assertThrows(EmptyResultDataAccessException.class, () -> {
             dao.get("unknown_id");
+        });
+    }
+
+    @Test
+    public void duplicateKey() throws DuplicateUserIdException {
+        dao.deleteAll();
+
+        dao.add(user1);
+
+        assertThrows(DuplicateUserIdException.class, () -> {
+            dao.add(user1);
         });
     }
 
