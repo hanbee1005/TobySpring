@@ -1,5 +1,5 @@
 import dao.JdbcContext;
-import dao.UserDao;
+import dao.UserDaoJdbc;
 import domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 class MainTest {
-    UserDao dao;
+    UserDaoJdbc dao;
 
     private User user1;
     private User user2;
@@ -27,7 +27,7 @@ class MainTest {
         this.user2 = new User("leegw700", "이길원", "springno2");
         this.user3 = new User("bumjin", "박범진", "springno03");
 
-        dao = new UserDao();
+        dao = new UserDaoJdbc();
         DataSource dataSource = new SingleConnectionDataSource(
                 "jdbc:mysql://localhost/test_tobyspring_db", "admin", "admin123", true);
         dao.setDataSource(dataSource);
